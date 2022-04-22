@@ -1,5 +1,6 @@
 class Pokemon {
     static amountOfPokemon = 0;
+    static pokemonArray = [];
 
     constructor(name, hitpoints, energyType, attacks, resistance, weakness) {
         this.name = name;
@@ -29,5 +30,14 @@ class Pokemon {
 
     getAmountOfPokemon() {
         return amountOfPokemon;
+    }
+
+    static deletePokemon() {
+        for (var i = 0; i < Pokemon.pokemonArray.length; i++) {
+            if (Pokemon.pokemonArray[i].health <= 0) {
+                Pokemon.pokemonArray.splice(Pokemon.pokemonArray[i], 1);
+                amountOfPokemon--;
+            }
+        }
     }
 }
