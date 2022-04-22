@@ -1,40 +1,41 @@
 class Pokemon {
-    static amountOfPokemon = 0;
     static pokemonArray = [];
+    static amountOfPokemon = 0;
 
-    constructor(name, hitpoints, energyType, attacks, resistance, weakness) {
+    constructor(name, hitpoints, energyType, attacks, weakness, resistance) {
         this.name = name;
         this.hitpoints = hitpoints;
+        this.health = hitpoints;
         this.energyType = energyType;
         this.attacks = attacks;
-        this.resistance = resistance;
         this.weakness = weakness;
+        this.resistance = resistance;
         Pokemon.amountOfPokemon++;
     }
 
-    attack(target, attack) {
-        target.takeDamage(this.energyType, this.attacks[attack])
+    attack(target, attack){
+        target.takeDamage(this.energyType, this.attacks[attack]);
     }
 
     takeDamage(energyType, attack) {
-        if (energyType.name == this.resistance.energyType.name) {
+        if (energyType.name == this.resistance.energyType.name){
             attack.value = attack.value - this.resistance.value;
         }
 
-        if (energyType.name == this.weakness.energyType.name) {
+        if (energyType.name == this.weakness.energyType.name){
             this.health = this.health - attack.value * this.weakness.value;
         } else {
             this.health = this.health - attack.value
         }
     }
 
-    getAmountOfPokemon() {
-        return amountOfPokemon;
+    static getPopulation() {
+        return Pokemon.amountOfPokemon;
     }
 
-    static deletePokemon() {
+    static removeDead() {
         for (var i = 0; i < Pokemon.pokemonArray.length; i++) {
-            if (Pokemon.pokemonArray[i].health <= 0) {
+            if (Pokemon.pokemonArray[i].hitpoints <= 0) {
                 Pokemon.pokemonArray.splice(Pokemon.pokemonArray[i], 1);
                 amountOfPokemon--;
             }
