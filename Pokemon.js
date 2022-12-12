@@ -3,30 +3,37 @@ class Pokemon {
     static amountOfPokemon = 0; //Set amount of pokemon
 
     constructor(name, hitpoints, energyType, attacks, weakness, resistance) {
-        this.name = name;
+        this._name = name;
         this.hitpoints = hitpoints;
-        this.health = hitpoints;
-        this.energyType = energyType;
-        this.attacks = attacks;
-        this.weakness = weakness;
-        this.resistance = resistance;
+        this._health = hitpoints;
+        this._energyType = energyType;
+        this._attacks = attacks;
+        this._weakness = weakness;
+        this._resistance = resistance;
         Pokemon.amountOfPokemon++;
     }
 
     attack(target, attack){ //Function to attack target(pokemon) using the takeDamage function
-        target.takeDamage(this.energyType, this.attacks[attack]);
+        target.#takeDamage(this._energyType, this._attacks[attack]);
     }
 
-    takeDamage(energyType, attack) { //Function to calculate damage using multipliers and weaknesses
-        if (energyType.name == this.resistance.energyType.name){
-            attack.value = attack.value - this.resistance.value;
+    #takeDamage(energyType, attack) { //Function to calculate damage using multipliers and weaknesses
+        if (energyType.name == this._resistance.energyType.name){
+            attack.value = attack.value - this._resistance.value;
         }
-
-        if (energyType.name == this.weakness.energyType.name){
-            this.health = this.health - attack.value * this.weakness.value;
+        if (energyType.name == this._weakness.energyType.name){
+            this._health = this._health - attack.value * this._weakness.value;
         } else {
-            this.health = this.health - attack.value
+            this._health = this._health - attack.value
         }
+    }
+
+    getName() {
+        return this._name;
+    }
+
+    getHealth() {
+        return this._health;
     }
 
     static getPopulation() { //Get Amount of pokemon
