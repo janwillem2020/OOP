@@ -1,3 +1,4 @@
+// Create new pokemon and attach attacks
 class Pokemon {
     static pokemonArray = []; //Create array for pokemon to be put in
     static amountOfPokemon = 0; //Set amount of pokemon
